@@ -17,14 +17,16 @@ public class Movement1 implements MovementType {
 		e.setAngle(e.getAngle() + e.getRv() * mainGame.getDelta());
 
 		e.setPosition(x, y);
+		//System.out.println("debug1");
 
 		if (mainGame.getCurrentTime() > e.getNextShot()
 				&& e.getY() < mainGame.getPlayer().getY()) {
 			Projectile free = e.findFreeIndex();
 			double vx, vy;
-
+			
 			if (free != null) {
-				free.setPosition(e.getX(), e.getX());
+				
+				free.setPosition(e.getX(), e.getY());
 
 				vx = Math.cos(e.getAngle()) * 0.45;
 				vy = Math.sin(e.getAngle()) * 0.45 * (-1.0);

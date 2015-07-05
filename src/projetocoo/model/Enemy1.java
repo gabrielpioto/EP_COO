@@ -42,7 +42,7 @@ public class Enemy1 extends Enemy {
 		this.setVelocity(0.0, 0.20 + Math.random() * 0.15);
 		this.setAngle(3 * Math.PI / 2);
 		this.setRv(0.0);
-		this.activateProjectiles();
+		//this.activateProjectiles();
 		this.setNextShot(mainGame.getCurrentTime() + 500);
 		mainGame.setNextEnemy1Delay(mainGame.getCurrentTime() + 500);
 		
