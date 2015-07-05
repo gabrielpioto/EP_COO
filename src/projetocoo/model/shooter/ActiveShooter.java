@@ -35,7 +35,7 @@ public class ActiveShooter implements ShooterState {
 			boolean outY = shooter.getY() > GameLib.HEIGHT + 10 || shooter.getY() < -10;
 			boolean outX = shooter.getX() > GameLib.WIDTH + 10 || shooter.getX() < -10;
 			if(outX || outY) return new InactiveShooter();
-			else ((Enemy) shooter).updatePosition();
+			((Enemy) shooter).updatePosition();
 
 		}
 
