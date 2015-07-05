@@ -9,10 +9,6 @@ import projetocoo.model.base.Element;
 public class Background extends Element {
 
 	private double count;
-
-	MainGame game = MainGame.getInstance();
-
-	double background_count = 0.0;
 	Color color;
 
 	/*
@@ -22,10 +18,10 @@ public class Background extends Element {
 	 * final da tela ela volta para o topo ( % gameLib.HEIGHT)
 	 */
 
-	public Background(double x, double y, double speed, double count, int size, Color color) {
-		super(x, y, speed, 0.0, size);
+	public Background(double x, double y, double speed, int size, Color color) {
+		super(x, y, 0.0, speed, size);
 		setColor(color);
-		setCount(count);
+		setCount(0.0);
 	}
 
 	private void setColor(Color color) {
@@ -42,6 +38,7 @@ public class Background extends Element {
 
 	@Override
 	public void draw() {
+		MainGame game = MainGame.getInstance();
 
 		GameLib.setColor(color);
 		count += getVy() * game.getDelta();

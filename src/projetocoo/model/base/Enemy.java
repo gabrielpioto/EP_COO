@@ -1,26 +1,33 @@
 package projetocoo.model.base;
 
-import projetocoo.model.movements.MovementType;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Enemy extends Shooter{
+import projetocoo.MainGame;
+import projetocoo.model.Enemy1;
+import projetocoo.model.Enemy2;
+import projetocoo.model.EnemyProjectile;
+import projetocoo.model.movements.MovementType;
+import projetocoo.model.shooter.ActiveShooter;
+import projetocoo.model.shooter.InactiveShooter;
+
+public abstract class Enemy extends Shooter {
 	private double angle;
 	private double rv;
-	private int nextEnemyDelay;
 	private MovementType movementType;
-	
-	public Enemy(double radius, int nextEnemyDelay) {
+	private static final int NUMBER_PROJECTILES = 200;
+
+	public Enemy(double radius) {
 		super();
 		setRadius(radius);
-		setNextEnemyDelay(nextEnemyDelay);
-		setNumberProjectiles(200); //TODO: verificar posteriormente
-		//TODO: set radius projectile
+		List<EnemyProjectile> projectiles = new ArrayList<EnemyProjectile>();
+		for (int i = 0; i < NUMBER_PROJECTILES; i++) {
+			projectiles.add(new EnemyProjectile());
+		}
+		setProjectiles(projectiles);
 	}
 
-	public void setNextEnemyDelay(int nextEnemyDelay) {
-		this.nextEnemyDelay = nextEnemyDelay;
-	}
-	
-	public void updatePosition(){
+	public void updatePosition() {
 		this.movementType.updatePosition(this);
 	}
 
@@ -40,10 +47,6 @@ public abstract class Enemy extends Shooter{
 		return rv;
 	}
 
-	public int getNextEnemyDelay() {
-		return nextEnemyDelay;
-	}
-
 	public void setAngle(double angle) {
 		this.angle = angle;
 	}
@@ -51,7 +54,50 @@ public abstract class Enemy extends Shooter{
 	public void setRv(double rv) {
 		this.rv = rv;
 	}
-	
-	
-	
+
+	public static int getActiveEnemiesCount(List<? extends Enemy> enemies) {
+		int x = 0;
+		for (Enemy e : enemies) {
+			if (e.getState() instanceof ActiveShooter)
+				x++;
+		}
+		return x;
+	}
+
+	@Override
+	public boolean checkCollision(Element e) {
+		double dx = getX() - e.getX();
+		double dy = getY() - e.getY();
+		double dist = Math.sqrt(dx * dx + dy * dy);
+		return dist < getRadius();
+	}
+
+	public static void Spawn(List<? extends Enemy> enemies) {
+
+		long nextEnemyDelay = 0;
+		MainGame mainGame = MainGame.getInstance();
+
+		if (enemies.get(0) instanceof Enemy1) {
+			nextEnemyDelay = mainGame.getNextEnemy1Delay();
+		} else if (enemies.get(0) instanceof Enemy2) {
+			nextEnemyDelay = mainGame.getNextEnemy2Delay();
+		}
+
+		if (mainGame.getCurrentTime() > nextEnemyDelay) {
+
+			for (Enemy e : enemies) {
+
+				if (e.getState() instanceof InactiveShooter) {
+
+					e.spawn();
+					return;
+				}
+
+			}
+		}
+
+	}
+
+	public abstract void spawn();
+
 }

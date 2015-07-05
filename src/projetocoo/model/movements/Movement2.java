@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import projetocoo.GameLib;
 import projetocoo.MainGame;
 import projetocoo.model.base.Enemy;
+import projetocoo.model.base.Projectile;
 import projetocoo.model.projectile.ActiveProjectile;
-import projetocoo.model.projectile.Projectile;
 
 public class Movement2 implements MovementType {
 
-	private MainGame mainGame = MainGame.getInstance();
-
 	public void updatePosition(Enemy e) {
+		MainGame mainGame = MainGame.getInstance();
 		double x = e.getX(), y = e.getY();
 		boolean shootNow = false;
 		double previousY = e.getY();
@@ -49,7 +48,7 @@ public class Movement2 implements MovementType {
 			double[] angles = { Math.PI / 2 + Math.PI / 8, Math.PI / 2,
 					Math.PI / 2 - Math.PI / 8 };
 
-			ArrayList<Projectile> freeArray = e.findFreeIndex(angles.length);
+			ArrayList<Projectile> freeArray = (ArrayList<Projectile>) e.findFreeIndex(angles.length);
 
 			for (Projectile p : freeArray) {
 

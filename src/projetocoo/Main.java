@@ -59,7 +59,12 @@ public class Main {
 	/* Método principal */
 	
 	public static void main(String [] args){
-
+		MainGame.getInstance().run();
+		//return;
+		if(true){
+			return;
+		}
+		
 		/* Indica que o jogo está em execução */
 		boolean running = true;
 

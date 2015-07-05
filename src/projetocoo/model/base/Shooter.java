@@ -3,50 +3,42 @@ package projetocoo.model.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import projetocoo.model.projectile.Projectile;
-import projetocoo.model.shooter.ActiveShooter;
+import projetocoo.model.projectile.ActiveProjectile;
+import projetocoo.model.projectile.InactiveProjectile;
+import projetocoo.model.shooter.InactiveShooter;
 import projetocoo.model.shooter.ShooterState;
 
-public abstract class Shooter extends Element{
-	private double explosionEnd;
-	private double explosionStart;
+public abstract class Shooter extends Element {
+	private double explosionEnd = 0.0;
+	private double explosionStart = 0.0;
 	private long nextShot;
-	private int numberProjectiles;
-	private ArrayList<Projectile> projectiles;
-	protected ShooterState state;
-	
-	
+	private List<? extends Projectile> projectiles;
+	protected ShooterState state = new InactiveShooter();
+
 	public Shooter() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Shooter(double x, double y, double vx, double vy,
-			double radius) {
+	public Shooter(double x, double y, double vx, double vy, double radius) {
 		super(x, y, vx, vy, radius);
-		this.state = new ActiveShooter();
 	}
 
 	public Shooter(double x, double y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 	
-	public void checkCollision(List<? extends Element> elements){
+	public abstract boolean checkCollision(Element e);
+
+	public void collide(List<? extends Element> elements) {
 		state = state.checkCollision(elements, this);
 	}
-	
-	public void update(){
+
+	public void update() {
 		state = state.update(this);
 	}
 
-
-	public void setNextShot(long nextShot){
+	public void setNextShot(long nextShot) {
 		this.nextShot = nextShot;
-	}
-	
-	public void setNumberProjectiles(int numberProjectiles){
-		this.numberProjectiles = numberProjectiles;
 	}
 
 	public double getExplosionEnd() {
@@ -61,22 +53,31 @@ public abstract class Shooter extends Element{
 		return nextShot;
 	}
 
-	public int getNumberProjectiles() {
-		return numberProjectiles;
-	}
-
-	public ArrayList<Projectile> getProjectiles() {
+	public List<? extends Projectile> getProjectiles() {
 		return projectiles;
 	}
 	
-	public int findFreeIndex(){
-		// TODO
-		return 0;
+	protected void setProjectiles(List<? extends Projectile> projectiles){
+		this.projectiles = projectiles;
 	}
-	
-	public ArrayList<Projectile> findFreeIndex(int size){
-		// TODO
+
+	public Projectile findFreeIndex() {
+		for (Projectile p : projectiles) {
+			if (p.getState() instanceof InactiveProjectile) {
+				return p;
+			}
+		}
 		return null;
+	}
+
+	public List<Projectile> findFreeIndex(int size) {
+		ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+		for (Projectile p : projectiles) {
+			if (p.getState() instanceof InactiveProjectile) {
+				projectiles.add(p);
+			}
+		}
+		return projectiles;
 	}
 
 	public ShooterState getState() {
@@ -90,9 +91,15 @@ public abstract class Shooter extends Element{
 	public void setExplosionStart(double explosionStart) {
 		this.explosionStart = explosionStart;
 	}
-	
-	
 
-	
-	
+	public void activateProjectiles() {
+		for (Projectile p : projectiles) {
+			p.setState(new ActiveProjectile());
+		}
+	}
+
+	public void setState(ShooterState state) {
+		this.state = state;
+	}
+
 }

@@ -11,26 +11,23 @@ import projetocoo.model.base.Enemy;
 import projetocoo.model.base.Shooter;
 
 public class ActiveShooter implements ShooterState {
-	private MainGame mainGame = MainGame.getInstance();
+	
 
 	public ShooterState checkCollision(List<? extends Element> elements, Shooter shooter) {
-		double dx, dy, dist;
+		MainGame mainGame = MainGame.getInstance();
 
 		for (Element e : elements) {
 
-			dx = e.getX() - shooter.getX();
-			dy = e.getY() - shooter.getY();
-			dist = Math.sqrt(dx * dx + dy * dy);
-
-			if (dist < (shooter.getRadius() + e.getRadius()) * 0.8) {
-				shooter.setExplosionEnd(2000 + mainGame.getCurrentTime());
+			if (shooter.checkCollision(e)) {
 				shooter.setExplosionStart(mainGame.getCurrentTime());
+				shooter.setExplosionEnd(2000 + mainGame.getCurrentTime());
 				return new ExplodingShooter();
 			}
 
 		}
 		return this;
 	}
+	
 
 	public ShooterState update(Shooter shooter) {
 

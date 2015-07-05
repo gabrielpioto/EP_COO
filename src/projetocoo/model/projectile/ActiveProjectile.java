@@ -2,6 +2,7 @@ package projetocoo.model.projectile;
 
 import projetocoo.GameLib;
 import projetocoo.MainGame;
+import projetocoo.model.base.Projectile;
 
 public class ActiveProjectile implements ProjectileState {
 	private MainGame mainGame = MainGame.getInstance();
