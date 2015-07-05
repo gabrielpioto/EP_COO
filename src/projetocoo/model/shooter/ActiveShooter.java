@@ -4,8 +4,6 @@ import java.util.List;
 
 import projetocoo.GameLib;
 import projetocoo.MainGame;
-import projetocoo.model.Enemy1;
-import projetocoo.model.Enemy2;
 import projetocoo.model.base.Element;
 import projetocoo.model.base.Enemy;
 import projetocoo.model.base.Shooter;
@@ -34,21 +32,10 @@ public class ActiveShooter implements ShooterState {
 		if (shooter instanceof Enemy) {
 
 			/* verificando se inimigo saiu da tela */
-			if (shooter instanceof Enemy1
-					&& shooter.getY() > GameLib.HEIGHT + 10) {
-
-				return new InactiveShooter();
-
-			} else if (shooter instanceof Enemy2
-					&& (shooter.getX() < -10 || shooter.getX() > GameLib.WIDTH + 10)) {
-
-				return new InactiveShooter();
-
-			} else {
-
-				((Enemy) shooter).updatePosition();
-
-			}
+			boolean outY = shooter.getY() > GameLib.HEIGHT + 10 || shooter.getY() < -10;
+			boolean outX = shooter.getX() > GameLib.WIDTH + 10 || shooter.getX() < -10;
+			if(outX || outY) return new InactiveShooter();
+			else ((Enemy) shooter).updatePosition();
 
 		}
 
