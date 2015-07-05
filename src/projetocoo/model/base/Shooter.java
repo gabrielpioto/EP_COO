@@ -9,8 +9,8 @@ import projetocoo.model.shooter.InactiveShooter;
 import projetocoo.model.shooter.ShooterState;
 
 public abstract class Shooter extends Element {
-	private double explosionEnd = 0.0;
-	private double explosionStart = 0.0;
+	private long explosionEnd = 0;
+	private long explosionStart = 0;
 	private long nextShot;
 	private List<? extends Projectile> projectiles;
 	protected ShooterState state = new InactiveShooter();
@@ -45,7 +45,7 @@ public abstract class Shooter extends Element {
 		return explosionEnd;
 	}
 
-	public void setExplosionEnd(double explosionEnd) {
+	public void setExplosionEnd(long explosionEnd) {
 		this.explosionEnd = explosionEnd;
 	}
 
@@ -88,7 +88,7 @@ public abstract class Shooter extends Element {
 		return explosionStart;
 	}
 
-	public void setExplosionStart(double explosionStart) {
+	public void setExplosionStart(long explosionStart) {
 		this.explosionStart = explosionStart;
 	}
 

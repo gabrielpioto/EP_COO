@@ -9,28 +9,26 @@ import projetocoo.model.base.Enemy;
 import projetocoo.model.base.Shooter;
 
 public class ExplodingShooter implements ShooterState {
-	private MainGame mainGame = MainGame.getInstance();
+	
 
 	public ShooterState checkCollision(List<? extends Element> elements, Shooter shooter) {
 		return this;
 	}
 
 	public ShooterState update(Shooter shooter) {
-
+		MainGame mainGame = MainGame.getInstance();
+		
 		if (mainGame.getCurrentTime() > shooter.getExplosionEnd()) {
 			//Enemy
-			if (shooter.getClass().isInstance(Enemy.class)) {
-				
+			if (shooter instanceof Enemy) {
 				return new InactiveShooter();
 			//Player	
-			} else if (shooter.getClass().isInstance(Player.class)) {
-				
-				return new ActiveShooter();
-				
+			} else if (shooter instanceof Player) {
+				return new ActiveShooter();				
 			}
 			
 		}
-		return new InactiveShooter();
+		return this;
 	}
 
 }

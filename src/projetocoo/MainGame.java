@@ -204,6 +204,8 @@ public class MainGame {
 				e.update();
 				e.updatePosition();
 			}
+			
+			player.update();
 
 			Enemy.Spawn(enemies1);
 			Enemy.Spawn(enemies2);
@@ -211,10 +213,21 @@ public class MainGame {
 			
 			// /* Verificando se a explosão do player já acabou. */
 			// /* Ao final da explosão, o player volta a ser controlável */
-			if(player.getState() instanceof ExplodingShooter){
-				if(currentTime > player.getExplosionEnd()){
-					player.setState(new ActiveShooter());
-				}
+			
+			//System.out.println(player.getState());
+//			if(player.getState() instanceof ExplodingShooter){
+//				if(currentTime > player.getExplosionEnd()){
+//					player.setState(new ActiveShooter());
+//				}
+//			}
+			
+			if(player.getState() instanceof ActiveShooter){
+				double x = player.getX();
+				if(GameLib.iskeyPressed(GameLib.KEY_LEFT))
+					x -= delta * player.getVx();
+				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT))
+					x += delta * player.getVx();
+				player.setPosition(x, player.getY());
 			}
 			
 			//
