@@ -25,8 +25,7 @@ public class ExplodingShooter implements ShooterState {
 			//Player	
 			} else if (shooter instanceof Player) {
 				return new ActiveShooter();				
-			}
-			
+			}			
 		}
 		return this;
 	}

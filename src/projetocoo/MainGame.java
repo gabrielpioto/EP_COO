@@ -181,6 +181,7 @@ public class MainGame {
 			// /***************************/
 			//
 			// /* projeteis (player) */
+			player.update();
 
 			for (Projectile p : player.getProjectiles()) {
 				p.update();
@@ -193,7 +194,7 @@ public class MainGame {
 					p.update();
 				}
 				e.update();
-				e.updatePosition();
+				//e.updatePosition();
 			}
 
 			// /* inimigos tipo 2 */
@@ -202,24 +203,11 @@ public class MainGame {
 					p.update();
 				}
 				e.update();
-				e.updatePosition();
-			}
-			
-			player.update();
+				//e.updatePosition();
+			}			
 
 			Enemy.Spawn(enemies1);
 			Enemy.Spawn(enemies2);
-
-			
-			// /* Verificando se a explosão do player já acabou. */
-			// /* Ao final da explosão, o player volta a ser controlável */
-			
-			//System.out.println(player.getState());
-//			if(player.getState() instanceof ExplodingShooter){
-//				if(currentTime > player.getExplosionEnd()){
-//					player.setState(new ActiveShooter());
-//				}
-//			}
 			
 			if(player.getState() instanceof ActiveShooter){
 				double x = player.getX();

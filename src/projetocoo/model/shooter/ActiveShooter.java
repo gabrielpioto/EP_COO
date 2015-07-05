@@ -31,7 +31,7 @@ public class ActiveShooter implements ShooterState {
 
 	public ShooterState update(Shooter shooter) {
 
-		if (shooter.getClass().isInstance(Enemy.class)) {
+		if (shooter instanceof Enemy) {
 
 			/* verificando se inimigo saiu da tela */
 			if (shooter instanceof Enemy1
