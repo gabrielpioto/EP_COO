@@ -10,7 +10,7 @@ public class ActiveProjectile implements ProjectileState {
 
 		double x = projectile.getX(), y = projectile.getY();
 
-		/* verificando se projétil saiu da tela */
+		/* verificando se projï¿½til saiu da tela */
 		if (projectile.getY() < 0 || projectile.getY() > GameLib.HEIGHT) {
 			return new InactiveProjectile();
 		} else {
