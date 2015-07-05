@@ -72,16 +72,9 @@ public abstract class Enemy extends Shooter {
 		return dist < getRadius();
 	}
 
-	public static void Spawn(List<? extends Enemy> enemies) {
+	public static void Spawn(List<? extends Enemy> enemies, long nextEnemyDelay) {
 
-		long nextEnemyDelay = 0;
 		MainGame mainGame = MainGame.getInstance();
-
-		if (enemies.get(0) instanceof Enemy1) {
-			nextEnemyDelay = mainGame.getNextEnemy1Delay();
-		} else if (enemies.get(0) instanceof Enemy2) {
-			nextEnemyDelay = mainGame.getNextEnemy2Delay();
-		}
 
 		if (mainGame.getCurrentTime() > nextEnemyDelay) {
 

@@ -3,16 +3,18 @@ package projetocoo;
 /* oi*/
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import projetocoo.model.Background;
 import projetocoo.model.Enemy1;
 import projetocoo.model.Enemy2;
+import projetocoo.model.Enemy3;
 import projetocoo.model.Player;
+import projetocoo.model.base.Element;
 import projetocoo.model.base.Enemy;
 import projetocoo.model.base.Projectile;
 import projetocoo.model.shooter.ActiveShooter;
-import projetocoo.model.shooter.ExplodingShooter;
 
 public class MainGame {
 
@@ -31,6 +33,7 @@ public class MainGame {
 	private long currentTime = System.currentTimeMillis();
 	private long nextEnemy1Delay = (currentTime + 2000);
 	private long nextEnemy2Delay = (currentTime + 7000);
+	private long nextEnemy3Delay = (currentTime + 5000);
 
 	public long getNextEnemy1Delay() {
 		return nextEnemy1Delay;
@@ -48,6 +51,14 @@ public class MainGame {
 		this.nextEnemy2Delay = nextEnemy2Delay;
 	}
 
+	public long getNextEnemy3Delay() {
+		return nextEnemy3Delay;
+	}
+
+	public void setNextEnemy3Delay(long nextEnemy3Delay) {
+		this.nextEnemy3Delay = nextEnemy3Delay;
+	}
+
 	private Player player = new Player(GameLib.WIDTH / 2,
 			GameLib.HEIGHT * 0.90, 0.25, 0.25, 12, currentTime);
 
@@ -56,10 +67,14 @@ public class MainGame {
 	private List<Enemy1> enemies1 = new ArrayList<Enemy1>(NUMBER_ENEMIES_1);
 
 	private List<Enemy2> enemies2 = new ArrayList<Enemy2>(NUMBER_ENEMIES_2);
+	
+	private List<Enemy3> enemies3 = Collections.singletonList(new Enemy3());
 
 	private List<Background> backs1 = new ArrayList<Background>(NUMBER_BACKS_1);
 
 	private List<Background> backs2 = new ArrayList<Background>(NUMBER_BACKS_2);
+	
+	
 
 	// private List<Projectile> playerProjectiles= new
 	// ArrayList<Projectile>(NUMBER_PROJECTILES);
@@ -174,6 +189,7 @@ public class MainGame {
 
 			player.collide(enemies1);
 			player.collide(enemies2);
+			player.collide(enemies3);
 
 			//
 			// /***************************/
@@ -204,10 +220,15 @@ public class MainGame {
 				}
 				e.update();
 				//e.updatePosition();
-			}			
+			}
+			
+			for(Enemy3 e : enemies3){
+				e.update();
+			}
 
-			Enemy.Spawn(enemies1);
-			Enemy.Spawn(enemies2);
+			Enemy.Spawn(enemies1, nextEnemy1Delay);
+			Enemy.Spawn(enemies2, nextEnemy2Delay);
+			Enemy.Spawn(enemies3, nextEnemy3Delay);
 			
 			if(player.getState() instanceof ActiveShooter){
 				double x = player.getX();
@@ -314,6 +335,13 @@ public class MainGame {
 
 			for (int i = 0; i < enemies2.size(); i++) {
 				enemies2.get(i).draw();
+			}
+			
+			/* desenhando inimigos (tipo 3) */
+
+			
+			for (Element e : enemies3) {
+				e.draw();
 			}
 
 			// /* chamama a display() da classe GameLib atualiza o desenho
