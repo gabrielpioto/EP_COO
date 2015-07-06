@@ -47,7 +47,7 @@ public class Movement2 implements MovementType {
 			int k = 0;
 			double[] angles = { Math.PI / 2 + Math.PI / 8, Math.PI / 2,
 					Math.PI / 2 - Math.PI / 8 };
-
+			
 			ArrayList<Projectile> freeArray = (ArrayList<Projectile>) e.findFreeIndex(angles.length);
 
 			for (Projectile p : freeArray) {

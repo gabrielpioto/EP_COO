@@ -44,24 +44,23 @@ public class Enemy2 extends Enemy {
 		x = SPAWN_X;
 		y = -10.0;
 		this.setPosition(x, y);
-		this.setVelocity(0.42, 0);
+		this.setVelocity(0.42, 0.42);
 		this.setAngle((3 * Math.PI) / 2);
 		this.setRv(0.0);
-		this.activateProjectiles();
+		//this.activateProjectiles();
 		this.setNextShot(mainGame.getCurrentTime() + 500);
 		mainGame.setNextEnemy1Delay(mainGame.getCurrentTime() + 500);
 		
-		enemyCount = Enemy.getActiveEnemiesCount(mainGame.getEnemies2());
-		
 		this.setState(new ActiveShooter());
+		
+		enemyCount = Enemy.getActiveEnemiesCount(mainGame.getEnemies2());
 
+		
 		if (enemyCount < 10) {
 			
 			mainGame.setNextEnemy2Delay(mainGame.getCurrentTime() + 120);
 			
 		} else {
-
-			enemyCount = 0;
 			SPAWN_X = Math.random() > 0.5 ? GameLib.WIDTH * 0.2
 					: GameLib.WIDTH * 0.8;
 			mainGame.setNextEnemy2Delay((long) (mainGame.getCurrentTime() +  3000 + Math.random() * 3000));

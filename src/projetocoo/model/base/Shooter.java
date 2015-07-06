@@ -70,11 +70,16 @@ public abstract class Shooter extends Element {
 		return null;
 	}
 
-	public List<Projectile> findFreeIndex(int size) {
+	public List<Projectile> findFreeIndex(int maxSize) {
+		int size=0;
 		ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-		for (Projectile p : projectiles) {
+		for (Projectile p : this.projectiles) {
 			if (p.getState() instanceof InactiveProjectile) {
 				projectiles.add(p);
+				size++;
+				if(size>=maxSize){
+					return projectiles;
+				}
 			}
 		}
 		return projectiles;
@@ -97,7 +102,7 @@ public abstract class Shooter extends Element {
 			p.setState(new ActiveProjectile());
 		}
 	}
-
+	
 	public void setState(ShooterState state) {
 		this.state = state;
 	}

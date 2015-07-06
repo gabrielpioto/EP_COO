@@ -7,7 +7,6 @@ import projetocoo.model.base.Enemy;
 public class Movement3 implements MovementType{
 	
 	
-	@Override
 	public void updatePosition(Enemy e) {
 		MainGame mainGame = MainGame.getInstance();
 		Player p = mainGame.getPlayer();

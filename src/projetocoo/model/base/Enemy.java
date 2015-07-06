@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projetocoo.MainGame;
-import projetocoo.model.Enemy1;
-import projetocoo.model.Enemy2;
 import projetocoo.model.EnemyProjectile;
 import projetocoo.model.movements.MovementType;
 import projetocoo.model.shooter.ActiveShooter;
@@ -14,8 +12,8 @@ import projetocoo.model.shooter.InactiveShooter;
 public abstract class Enemy extends Shooter {
 	private double angle;
 	private double rv;
-	private MovementType movementType;
 	private static final int NUMBER_PROJECTILES = 200;
+	private MovementType movementType;
 
 	public Enemy(double radius) {
 		super();
@@ -25,18 +23,6 @@ public abstract class Enemy extends Shooter {
 			projectiles.add(new EnemyProjectile());
 		}
 		setProjectiles(projectiles);
-	}
-
-	public void updatePosition() {
-		this.movementType.updatePosition(this);
-	}
-
-	public MovementType getMovementType() {
-		return movementType;
-	}
-
-	public void setMovementType(MovementType movementType) {
-		this.movementType = movementType;
 	}
 
 	public double getAngle() {
@@ -89,6 +75,19 @@ public abstract class Enemy extends Shooter {
 			}
 		}
 
+	}
+	
+	
+	public void updatePosition() {
+		this.movementType.updatePosition(this);
+	}
+
+	public MovementType getMovementType() {
+		return movementType;
+	}
+
+	public void setMovementType(MovementType movementType) {
+		this.movementType = movementType;
 	}
 
 	public abstract void spawn();

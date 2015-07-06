@@ -7,7 +7,10 @@ import java.util.List;
 import projetocoo.GameLib;
 import projetocoo.MainGame;
 import projetocoo.model.base.Element;
+import projetocoo.model.base.Projectile;
 import projetocoo.model.base.Shooter;
+import projetocoo.model.projectile.ActiveProjectile;
+import projetocoo.model.shooter.ActiveShooter;
 import projetocoo.model.shooter.ExplodingShooter;
 
 public class Player extends Shooter {
@@ -23,8 +26,6 @@ public class Player extends Shooter {
 		}
 		setProjectiles(projectiles);
 	}
-	
-	
 
 	@Override
 	public void draw() {
@@ -39,15 +40,49 @@ public class Player extends Shooter {
 		}
 	}
 
-
-
 	@Override
 	public boolean checkCollision(Element e) {
 		double dx = e.getX() - getX();
 		double dy = e.getY() - getY();
 		double dist = Math.sqrt(dx * dx + dy * dy);
-		
+
 		return dist < (getRadius() + e.getRadius()) * 0.8;
+	}
+
+	public void updatePosition() {
+		MainGame mainGame = MainGame.getInstance();
+
+		if (this.getState() instanceof ActiveShooter) {
+			double x = this.getX(), y = this.getY();
+			if (GameLib.iskeyPressed(GameLib.KEY_LEFT))
+				x -= mainGame.getDelta() * this.getVx();
+			if (GameLib.iskeyPressed(GameLib.KEY_RIGHT))
+				x += mainGame.getDelta() * this.getVx();
+
+			if (GameLib.iskeyPressed(GameLib.KEY_UP))
+				y -= mainGame.getDelta() * this.getVy();
+			if (GameLib.iskeyPressed(GameLib.KEY_DOWN))
+				y += mainGame.getDelta() * this.getVy();
+
+			this.setPosition(x, y);
+
+			if (GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
+
+				if (mainGame.getCurrentTime() > this.getNextShot()) {
+
+					Projectile free = this.findFreeIndex();
+
+					if (free != null) {
+						y -= 2 * this.getRadius();
+						free.setPosition(x, y);
+						free.setVelocity(0.0, -1.0);
+						free.setState(new ActiveProjectile());
+						this.setNextShot(mainGame.getCurrentTime() + 100);
+					}
+				}
+			}
+
+		}
 	}
 
 }

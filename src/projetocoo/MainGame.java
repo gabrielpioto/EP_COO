@@ -11,8 +11,10 @@ import projetocoo.model.Enemy1;
 import projetocoo.model.Enemy2;
 import projetocoo.model.Enemy3;
 import projetocoo.model.Player;
+import projetocoo.model.PowerUp1;
 import projetocoo.model.base.Element;
 import projetocoo.model.base.Enemy;
+import projetocoo.model.base.PowerUp;
 import projetocoo.model.base.Projectile;
 import projetocoo.model.shooter.ActiveShooter;
 
@@ -23,6 +25,7 @@ public class MainGame {
 	private static final int NUMBER_ENEMIES_2 = 10;
 	private static final int NUMBER_BACKS_1 = 20;
 	private static final int NUMBER_BACKS_2 = 50;
+	private static final int NUMBER_POWERUPS_1 = 1;
 
 	/* Indica que o jogo está em execução */
 	boolean running = true;
@@ -34,6 +37,15 @@ public class MainGame {
 	private long nextEnemy1Delay = (currentTime + 2000);
 	private long nextEnemy2Delay = (currentTime + 7000);
 	private long nextEnemy3Delay = (currentTime + 5000);
+	private long nextPowerUp1Delay = (currentTime + 1000);
+
+	public void setNextPowerUp1Delay(long nextPowerUp1Delay) {
+		this.nextPowerUp1Delay = nextPowerUp1Delay;
+	}
+
+	public long getNextPowerUp1Delay() {
+		return nextPowerUp1Delay;
+	}
 
 	public long getNextEnemy1Delay() {
 		return nextEnemy1Delay;
@@ -67,14 +79,15 @@ public class MainGame {
 	private List<Enemy1> enemies1 = new ArrayList<Enemy1>(NUMBER_ENEMIES_1);
 
 	private List<Enemy2> enemies2 = new ArrayList<Enemy2>(NUMBER_ENEMIES_2);
-	
+
 	private List<Enemy3> enemies3 = Collections.singletonList(new Enemy3());
 
 	private List<Background> backs1 = new ArrayList<Background>(NUMBER_BACKS_1);
 
 	private List<Background> backs2 = new ArrayList<Background>(NUMBER_BACKS_2);
-	
-	
+
+	private List<PowerUp1> powerUps1 = new ArrayList<PowerUp1>(
+			NUMBER_POWERUPS_1);
 
 	// private List<Projectile> playerProjectiles= new
 	// ArrayList<Projectile>(NUMBER_PROJECTILES);
@@ -85,7 +98,7 @@ public class MainGame {
 	public MainGame() {
 
 		this.player.setState(new ActiveShooter());
-		
+
 		this.currentTime = System.currentTimeMillis();
 
 		for (int i = 0; i < NUMBER_ENEMIES_1; i++) {
@@ -94,6 +107,10 @@ public class MainGame {
 
 		for (int i = 0; i < NUMBER_ENEMIES_2; i++) {
 			enemies2.add(new Enemy2(12.0));
+		}
+
+		for (int i = 0; i < NUMBER_POWERUPS_1; i++) {
+			powerUps1.add(new PowerUp1(5.0));
 		}
 
 		for (int i = 0; i < NUMBER_BACKS_1; i++) {
@@ -119,13 +136,13 @@ public class MainGame {
 		 */
 
 		// TODO checar os parametros que envio para criar um inimigo
-//		for (int i = 0; i < NUMBER_ENEMIES_1; i++) {
-//			enemies1.add(new Enemy1(9.0));
-//		}
-//
-//		for (int i = 0; i < NUMBER_ENEMIES_2; i++) {
-//			enemies2.add(new Enemy2(0));
-//		}
+		// for (int i = 0; i < NUMBER_ENEMIES_1; i++) {
+		// enemies1.add(new Enemy1(9.0));
+		// }
+		//
+		// for (int i = 0; i < NUMBER_ENEMIES_2; i++) {
+		// enemies2.add(new Enemy2(0));
+		// }
 		//
 		// System.exit(0);
 		//
@@ -198,6 +215,7 @@ public class MainGame {
 			//
 			// /* projeteis (player) */
 			player.update();
+			player.updatePosition();
 
 			for (Projectile p : player.getProjectiles()) {
 				p.update();
@@ -210,7 +228,7 @@ public class MainGame {
 					p.update();
 				}
 				e.update();
-				//e.updatePosition();
+				// e.updatePosition();
 			}
 
 			// /* inimigos tipo 2 */
@@ -219,26 +237,22 @@ public class MainGame {
 					p.update();
 				}
 				e.update();
-				//e.updatePosition();
+				// e.updatePosition();
 			}
-			
-			for(Enemy3 e : enemies3){
+
+			for (Enemy3 e : enemies3) {
 				e.update();
+			}
+
+			for (PowerUp1 p : powerUps1) {
+				p.update();
 			}
 
 			Enemy.Spawn(enemies1, nextEnemy1Delay);
 			Enemy.Spawn(enemies2, nextEnemy2Delay);
 			Enemy.Spawn(enemies3, nextEnemy3Delay);
-			
-			if(player.getState() instanceof ActiveShooter){
-				double x = player.getX();
-				if(GameLib.iskeyPressed(GameLib.KEY_LEFT))
-					x -= delta * player.getVx();
-				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT))
-					x += delta * player.getVx();
-				player.setPosition(x, player.getY());
-			}
-			
+			PowerUp.Spawn(powerUps1, nextPowerUp1Delay);
+
 			//
 			// /********************************************/
 			// /* Verificando entrada do usuário (teclado) */
@@ -288,9 +302,10 @@ public class MainGame {
 			/*******************/
 
 			/* desenhando plano fundo */
-			for(Background b : backs1) b.draw();
-			for(Background b : backs2) b.draw();
-
+			for (Background b : backs1)
+				b.draw();
+			for (Background b : backs2)
+				b.draw();
 
 			/* desenhando player */
 
@@ -336,12 +351,17 @@ public class MainGame {
 			for (int i = 0; i < enemies2.size(); i++) {
 				enemies2.get(i).draw();
 			}
-			
+
 			/* desenhando inimigos (tipo 3) */
 
-			
 			for (Element e : enemies3) {
 				e.draw();
+			}
+
+			/* desenhando powerups (tipo 1) */
+
+			for (PowerUp1 p : powerUps1) {
+				p.draw();
 			}
 
 			// /* chamama a display() da classe GameLib atualiza o desenho
@@ -379,10 +399,11 @@ public class MainGame {
 	public Player getPlayer() {
 		return player;
 	}
-	
-	public static void busyWait(long time){
-		
-		while(System.currentTimeMillis() < time) Thread.yield();
+
+	public static void busyWait(long time) {
+
+		while (System.currentTimeMillis() < time)
+			Thread.yield();
 	}
 
 }
