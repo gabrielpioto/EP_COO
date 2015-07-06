@@ -18,7 +18,7 @@ public class ActiveShooter implements ShooterState {
 
 			if (shooter.checkCollision(e)) {
 				shooter.setExplosionStart(mainGame.getCurrentTime());
-				shooter.setExplosionEnd(2000 + mainGame.getCurrentTime());
+				shooter.setExplosionEnd(shooter.getExplosionDelay() + mainGame.getCurrentTime());
 				return new ExplodingShooter();
 			}
 

@@ -23,6 +23,7 @@ public abstract class Enemy extends Shooter {
 			projectiles.add(new EnemyProjectile());
 		}
 		setProjectiles(projectiles);
+		setExplosionDelay(500);
 	}
 
 	public double getAngle() {

@@ -28,6 +28,7 @@ public class Player extends Shooter {
 			projectiles.add(new PlayerProjectile());
 		}
 		setProjectiles(projectiles);
+		setExplosionDelay(2000);
 	}
 
 	public long getNextShotDelay() {

@@ -11,6 +11,7 @@ import projetocoo.model.shooter.ShooterState;
 public abstract class Shooter extends Element implements Updatable{
 	private long explosionEnd = 0;
 	private long explosionStart = 0;
+	private long explosionDelay;
 	private long nextShot;
 	private List<? extends Projectile> projectiles;
 	protected ShooterState state = new InactiveShooter();
@@ -39,6 +40,14 @@ public abstract class Shooter extends Element implements Updatable{
 
 	public void setNextShot(long nextShot) {
 		this.nextShot = nextShot;
+	}
+	
+	public long getExplosionDelay() {
+		return explosionDelay;
+	}
+
+	public void setExplosionDelay(long explosionDelay) {
+		this.explosionDelay = explosionDelay;
 	}
 
 	public double getExplosionEnd() {
