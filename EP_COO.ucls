@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="projetocoo.model.shooter.ExplodingShooter" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/shooter/ExplodingShooter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="102" y="303"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="projetocoo.model.shooter.InactiveShooter" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/shooter/InactiveShooter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="100" y="216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="projetocoo.model.shooter.ShooterState" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/shooter/ShooterState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="99" y="17"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="projetocoo.model.shooter.ActiveShooter" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/shooter/ActiveShooter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="99" y="128"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="projetocoo.model.base.Shooter" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/Shooter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="377" y="165"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="projetocoo.model.base.Enemy" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="314" y="376"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="projetocoo.model.Player" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="507" y="371"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="projetocoo.model.base.Element" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/Element.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="373" y="-131"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="projetocoo.model.base.PowerUp" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/PowerUp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="605" y="170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="projetocoo.model.base.Projectile" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/Projectile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="240" y="-1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="projetocoo.model.movements.MovementType" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/movements/MovementType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="101" y="384"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="projetocoo.model.Background" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/Background.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="609" y="-122"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="projetocoo.model.base.Updatable" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/Updatable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="551" y="-5"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <interface id="14" language="java" name="projetocoo.model.base.Drawable" project="EP_COO" 
+    file="/EP_COO/src/projetocoo/model/base/Drawable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="118" y="-97"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="true" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <dependency id="15">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <realization id="16">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <dependency id="17">    
+    <bendpoint x="28" y="254"/>    
+    <bendpoint x="27" y="128"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <generalization id="18">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <dependency id="20">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <realization id="21">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="22">    
+    <bendpoint x="10" y="300"/>    
+    <bendpoint x="11" y="183"/>    
+    <bendpoint x="11" y="30"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <realization id="24">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <realization id="26">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="27">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <generalization id="28">    
+    <bendpoint x="451" y="43"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="29">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="30" name="movementType"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="36">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="37" name="state"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="39">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <realization id="40">    
+    <bendpoint x="194" y="169"/>    
+    <bendpoint x="179" y="97"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="41">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="42" name="projectiles"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="false" protected="true" private="true" static="false"/>    
+    <operations public="false" package="false" protected="true" private="true" static="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
