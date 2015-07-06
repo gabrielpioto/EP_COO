@@ -6,7 +6,6 @@ import java.util.List;
 import projetocoo.GameLib;
 import projetocoo.MainGame;
 import projetocoo.model.Player;
-import projetocoo.model.shooter.InactiveShooter;
 
 public abstract class PowerUp extends Element implements Updatable{
 	private boolean active = false;
