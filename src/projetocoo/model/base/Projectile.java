@@ -3,7 +3,7 @@ package projetocoo.model.base;
 import projetocoo.model.projectile.InactiveProjectile;
 import projetocoo.model.projectile.ProjectileState;
 
-public abstract class Projectile extends Element{
+public abstract class Projectile extends Element implements Updatable{
 	
 	protected ProjectileState state;
 	

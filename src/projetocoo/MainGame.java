@@ -3,6 +3,7 @@ package projetocoo;
 /* oi*/
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,10 +14,10 @@ import projetocoo.model.Enemy3;
 import projetocoo.model.Player;
 import projetocoo.model.PowerUp1;
 import projetocoo.model.PowerUp2;
-import projetocoo.model.base.Element;
+import projetocoo.model.base.Drawable;
 import projetocoo.model.base.Enemy;
 import projetocoo.model.base.PowerUp;
-import projetocoo.model.base.Projectile;
+import projetocoo.model.base.Updatable;
 import projetocoo.model.shooter.ActiveShooter;
 
 public class MainGame {
@@ -36,51 +37,17 @@ public class MainGame {
 
 	private long delta;
 	private long currentTime = System.currentTimeMillis();
-	
+
 	private long nextEnemy1Delay = (currentTime + 2000);
 	private long nextEnemy2Delay = (currentTime + 7000);
 	private long nextEnemy3Delay = (currentTime + 5000);
-	
+
 	private long nextPowerUp1Delay = (currentTime + 1000);
 	private long nextPowerUp2Delay = (currentTime + 1000);
-
-	public void setNextPowerUp1Delay(long nextPowerUp1Delay) {
-		this.nextPowerUp1Delay = nextPowerUp1Delay;
-	}
-	
-	public void setNextPowerUp2Delay(long nextPowerUp2Delay) {
-		this.nextPowerUp2Delay = nextPowerUp2Delay;	
-	}
-
-	public long getNextEnemy1Delay() {
-		return nextEnemy1Delay;
-	}
-
-	public void setNextEnemy1Delay(long nextEnemy1Delay) {
-		this.nextEnemy1Delay = nextEnemy1Delay;
-	}
-
-	public long getNextEnemy2Delay() {
-		return nextEnemy2Delay;
-	}
-
-	public void setNextEnemy2Delay(long nextEnemy2Delay) {
-		this.nextEnemy2Delay = nextEnemy2Delay;
-	}
-
-	public long getNextEnemy3Delay() {
-		return nextEnemy3Delay;
-	}
-
-	public void setNextEnemy3Delay(long nextEnemy3Delay) {
-		this.nextEnemy3Delay = nextEnemy3Delay;
-	}
 
 	private Player player = new Player(GameLib.WIDTH / 2,
 			GameLib.HEIGHT * 0.90, 0.25, 0.25, 12, currentTime);
 
-	// Enemy1 enemy1 = new Enemy1(9.0, 2000);
-	// Enemy2 enemy2 = new Enemy2(12.0, 7000, GameLib.WIDTH * 0.20, 0);
 	private List<Enemy1> enemies1 = new ArrayList<Enemy1>(NUMBER_ENEMIES_1);
 
 	private List<Enemy2> enemies2 = new ArrayList<Enemy2>(NUMBER_ENEMIES_2);
@@ -91,15 +58,11 @@ public class MainGame {
 
 	private List<Background> backs2 = new ArrayList<Background>(NUMBER_BACKS_2);
 
-	private List<PowerUp1> powerUps1 = new ArrayList<PowerUp1>(NUMBER_POWERUPS_1);
-	
-	private List<PowerUp2> powerUps2 = new ArrayList<PowerUp2>(NUMBER_POWERUPS_2);
+	private List<PowerUp1> powerUps1 = new ArrayList<PowerUp1>(
+			NUMBER_POWERUPS_1);
 
-	// private List<Projectile> playerProjectiles= new
-	// ArrayList<Projectile>(NUMBER_PROJECTILES);
-
-	// private List<Projectile> enemyProjectiles= new
-	// ArrayList<Projectile>(NUMBER_e_PROJECTILES);
+	private List<PowerUp2> powerUps2 = new ArrayList<PowerUp2>(
+			NUMBER_POWERUPS_2);
 
 	public MainGame() {
 
@@ -118,7 +81,7 @@ public class MainGame {
 		for (int i = 0; i < NUMBER_POWERUPS_1; i++) {
 			powerUps1.add(new PowerUp1(8.0));
 		}
-		
+
 		for (int i = 0; i < NUMBER_POWERUPS_2; i++) {
 			powerUps2.add(new PowerUp2(6.0));
 		}
@@ -135,27 +98,7 @@ public class MainGame {
 			backs2.add(new Background(x, y, 0.045, 2, Color.DARK_GRAY));
 		}
 
-		/*
-		 * for (int i = 0; i < NUMBER_PROJECTILES; i++){
-		 * playerProjectiles.add(new Projectile(0, 0, 0, 0, Color.GREEN)); }
-		 */
 
-		/*
-		 * for (int i = 0; i < NUMBER_e_PROJECTILES; i++){
-		 * enemyProjectiles.add(new Projectile(0, 0, 0, 0, Color.RED)); }
-		 */
-
-		// TODO checar os parametros que envio para criar um inimigo
-		// for (int i = 0; i < NUMBER_ENEMIES_1; i++) {
-		// enemies1.add(new Enemy1(9.0));
-		// }
-		//
-		// for (int i = 0; i < NUMBER_ENEMIES_2; i++) {
-		// enemies2.add(new Enemy2(0));
-		// }
-		//
-		// System.exit(0);
-		//
 	}
 
 	public void run() {
@@ -163,31 +106,25 @@ public class MainGame {
 		/* iniciado interface gráfica */
 		GameLib.initGraphics();
 
-		//
-		// /*************************************************************************************************/
-		// /* */
-		// /* Main loop do jogo */
-		// /* */
-		// /* O main loop do jogo possui executa as seguintes operações: */
-		// /* */
-		// /* 1) Verifica se há colisões e atualiza estados dos elementos
-		// conforme a necessidade. */
-		// /* */
-		// /* 2) Atualiza estados dos elementos baseados no tempo que correu
-		// desde a última atualização */
-		// /* e no timestamp atual: posição e orientação, execução de
-		// disparos de projéteis, etc. */
-		// /* */
-		// /* 3) Processa entrada do usuário (teclado) e atualiza estados do
-		// player conforme a necessidade. */
-		// /* */
-		// /* 4) Desenha a cena, a partir dos estados dos elementos. */
-		// /* */
-		// /* 5) Espera um período de tempo (de modo que delta seja
-		// aproximadamente sempre constante). */
-		// /* */
-		// /*************************************************************************************************/
-		//
+		/*************************************************************************************************/
+		/*                                                                                               */
+		/* Main loop do jogo                                                                             */
+		/*                                                                                               */
+		/* O main loop do jogo possui executa as seguintes operações:                                    */
+		/*                                                                                               */
+		/* 1) Verifica se há colisões e atualiza estados dos elementos conforme a necessidade.           */
+		/*                                                                                               */
+		/* 2) Atualiza estados dos elementos baseados no tempo que correu desde a última atualização     */
+		/*    e no timestamp atual: posição e orientação, execução de disparos de projéteis, etc.        */
+		/*                                                                                               */
+		/* 3) Processa entrada do usuário (teclado) e atualiza estados do player conforme a necessidade. */
+		/*                                                                                               */
+		/* 4) Desenha a cena, a partir dos estados dos elementos.                                        */
+		/*                                                                                               */
+		/* 5) Espera um período de tempo (de modo que delta seja aproximadamente sempre constante).      */
+		/*                                                                                               */
+		/*************************************************************************************************/
+		
 		while (running) {
 			//
 			// /* Usada para atualizar o estado dos elementos do jogo */
@@ -213,8 +150,8 @@ public class MainGame {
 				player.collide(enemy.getProjectiles());
 				enemy.collide(player.getProjectiles());
 			}
-			
-			for(Enemy enemy : enemies3){
+
+			for (Enemy enemy : enemies3) {
 				enemy.collide(Collections.singletonList(player));
 			}
 
@@ -222,50 +159,26 @@ public class MainGame {
 			player.collide(enemies2);
 			player.collide(enemies3);
 
-			//
-			// /***************************/
-			// /* Atualizações de estados */
-			// /***************************/
-			//
-			// /* projeteis (player) */
+			/***************************/
+			/* Atualizações de estados */
+			/***************************/
+
+			/* player */
 			player.update();
-			
 
-			for (Projectile p : player.getProjectiles()) {
-				p.update();
-			}
+			/* projeteis (player) */
+			update(player.getProjectiles());
 
-			// /* projeteis (inimigos) */
-			// /* inimigos tipo 1 */
-			for (Enemy e : enemies1) {
-				for (Projectile p : e.getProjectiles()) {
-					p.update();
-				}
-				e.update();
-				// e.updatePosition();
-			}
+			/* inimigos */
+			updateEnemies(enemies1);
+			updateEnemies(enemies2);
+			updateEnemies(enemies3);
 
-			// /* inimigos tipo 2 */
-			for (Enemy e : enemies2) {
-				for (Projectile p : e.getProjectiles()) {
-					p.update();
-				}
-				e.update();
-				// e.updatePosition();
-			}
+			/* powerUps */
+			update(powerUps1);
+			update(powerUps2);
 
-			for (Enemy3 e : enemies3) {
-				e.update();
-			}
-
-			for (PowerUp1 p : powerUps1) {
-				p.update();
-			}
-			
-			for (PowerUp2 p : powerUps2) {
-				p.update();
-			}
-
+			/* Spawns */
 			Enemy.Spawn(enemies1, nextEnemy1Delay);
 			Enemy.Spawn(enemies2, nextEnemy2Delay);
 			Enemy.Spawn(enemies3, nextEnemy3Delay);
@@ -276,80 +189,95 @@ public class MainGame {
 			/* Verificando entrada do usuário (teclado) */
 			/********************************************/
 			player.updatePosition();
-			 
-			
 
 			/*******************/
 			/* Desenho da cena */
 			/*******************/
 
 			/* desenhando plano fundo */
-			for (Background b : backs1)
-				b.draw();
-			for (Background b : backs2)
-				b.draw();
+
+			draw(backs1);
+			draw(backs2);
 
 			/* desenhando player */
 
 			player.draw();
 
-			/* deenhando projeteis (player) */
+			/* desenhando projeteis (player) */
 
-			for (Projectile p : player.getProjectiles()) {
-				p.draw();
-			}
+			draw(player.getProjectiles());
+
+			/* desenhando inimigos */
+
+			drawEnemies(enemies1);
+			drawEnemies(enemies2);
+			drawEnemies(enemies3);
+
+			/* desenhando powerups */
+
+			draw(powerUps1);
+			draw(powerUps2);
 
 			/*
-			 * for (int i = 0; i < playerProjectiles.size(); i++){
-			 * playerProjectiles.get(i).draw(); }
+			 * chamama a display() da classe GameLib atualiza o desenho exibido
+			 * pela interface do jogo.
 			 */
 
-			/* desenhando projeteis e inimigos */
-			for (Enemy e : enemies1) {
-				for (Projectile p : e.getProjectiles()) {
-					p.draw();
-				}
-				e.draw();
-			}
-
-			for (Enemy e : enemies2) {
-				for (Projectile p : e.getProjectiles()) {
-					p.draw();
-				}
-				e.draw();
-			}
-
-			/* desenhando inimigos (tipo 3) */
-
-			for (Element e : enemies3) {
-				e.draw();
-			}
-
-			/* desenhando powerups (tipo 1) */
-
-			for (PowerUp1 p : powerUps1) {
-				p.draw();
-			}
-			
-			for (PowerUp2 p : powerUps2) {
-				p.draw();
-			}
-
-			// /* chamama a display() da classe GameLib atualiza o desenho
-			// exibido pela interface do jogo. */
-			//
 			GameLib.display();
-			//
-			// /* faz uma pausa de modo que cada execução do laço do main
-			// loop demore aproximadamente 5 ms. */
-			//
+
+			/*
+			 * faz uma pausa de modo que cada execução do laço do main loop
+			 * demore aproximadamente 5 ms.
+			 */
+
 			busyWait(currentTime + 5);
+
 		}
-		
+
 	}
 
-	public List<Enemy1> getEnemies1() {
-		return enemies1;
+	private void updateEnemies(Collection<? extends Enemy> c) {
+		for (Enemy e : c) {
+			update(e.getProjectiles());
+			e.update();
+		}
+	}
+
+	private void update(Collection<? extends Updatable> c) {
+		for (Updatable e : c)
+			e.update();
+	}
+
+	private void drawEnemies(Collection<? extends Enemy> c) {
+		for (Enemy e : c) {
+			draw(e.getProjectiles());
+			e.draw();
+		}
+	}
+
+	private void draw(Collection<? extends Drawable> c) {
+		for (Drawable e : c)
+			e.draw();
+	}
+
+	public void setNextPowerUp1Delay(long nextPowerUp1Delay) {
+		this.nextPowerUp1Delay = nextPowerUp1Delay;
+	}
+
+	public void setNextPowerUp2Delay(long nextPowerUp2Delay) {
+		this.nextPowerUp2Delay = nextPowerUp2Delay;
+	}
+
+	public void setNextEnemy1Delay(long nextEnemy1Delay) {
+		this.nextEnemy1Delay = nextEnemy1Delay;
+	}
+
+	public void setNextEnemy2Delay(long nextEnemy2Delay) {
+		this.nextEnemy2Delay = nextEnemy2Delay;
+	}
+
+	public void setNextEnemy3Delay(long nextEnemy3Delay) {
+		this.nextEnemy3Delay = nextEnemy3Delay;
 	}
 
 	public List<Enemy2> getEnemies2() {
@@ -373,14 +301,17 @@ public class MainGame {
 	}
 
 	public static void busyWait(long time) {
-
 		while (System.currentTimeMillis() < time)
 			Thread.yield();
 	}
 
-	public void pauseResume(){
+	public void pauseResume() {
 		running = !running;
-	}	
+	}
+	
+	/** método main (para a execução) **/
+	public static void main(String[] args){
+		MainGame.getInstance().run();
+	}
 
 }
-

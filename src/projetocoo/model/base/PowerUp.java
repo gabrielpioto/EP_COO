@@ -8,7 +8,7 @@ import projetocoo.MainGame;
 import projetocoo.model.Player;
 import projetocoo.model.shooter.InactiveShooter;
 
-public abstract class PowerUp extends Element {
+public abstract class PowerUp extends Element implements Updatable{
 	private boolean active = false;
 	private Color color;
 

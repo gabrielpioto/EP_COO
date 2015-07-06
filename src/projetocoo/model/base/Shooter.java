@@ -8,7 +8,7 @@ import projetocoo.model.projectile.InactiveProjectile;
 import projetocoo.model.shooter.InactiveShooter;
 import projetocoo.model.shooter.ShooterState;
 
-public abstract class Shooter extends Element {
+public abstract class Shooter extends Element implements Updatable{
 	private long explosionEnd = 0;
 	private long explosionStart = 0;
 	private long nextShot;

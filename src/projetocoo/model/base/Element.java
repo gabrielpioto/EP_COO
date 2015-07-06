@@ -1,6 +1,6 @@
 package projetocoo.model.base;
 
-public abstract class Element {
+public abstract class Element implements Drawable{
 
 	private double x;
 	private double y;
@@ -54,9 +54,7 @@ public abstract class Element {
 
 	public void setRadius(double radius) {
 		this.radius = radius;
-	}
-
-	
+	}	
 	
 	public abstract void draw();
 
