@@ -229,7 +229,7 @@ public class MainGame {
 			//
 			// /* projeteis (player) */
 			player.update();
-			player.updatePosition();
+			
 
 			for (Projectile p : player.getProjectiles()) {
 				p.update();
@@ -272,49 +272,12 @@ public class MainGame {
 			PowerUp.Spawn(powerUps1, nextPowerUp1Delay);
 			PowerUp.Spawn(powerUps2, nextPowerUp2Delay);
 
-			//
-			// /********************************************/
-			// /* Verificando entrada do usuário (teclado) */
-			// /********************************************/
-			//
-			// if(player_state == ACTIVE){
-			//
-			// if(GameLib.iskeyPressed(GameLib.KEY_UP)) player_Y -= delta *
-			// player_VY;
-			// if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) player_Y += delta *
-			// player_VY;
-			// if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) player_X -= delta *
-			// player_VX;
-			// if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) player_X += delta *
-			// player_VY;
-			// if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
-			//
-			// if(currentTime > player_nextShot){
-			//
-			// int free = findFreeIndex(projectile_states);
-			//
-			// if(free < projectile_states.length){
-			//
-			// projectile_X[free] = player_X;
-			// projectile_Y[free] = player_Y - 2 * player_radius;
-			// projectile_VX[free] = 0.0;
-			// projectile_VY[free] = -1.0;
-			// projectile_states[free] = 1;
-			// player_nextShot = currentTime + 100;
-			// }
-			// }
-			// }
-			// }
-			//
-			// if(GameLib.iskeyPressed(GameLib.KEY_ESCAPE)) running = false;
-			//
-			// /* Verificando se coordenadas do player ainda estão dentro */
-			// /* da tela de jogo após processar entrada do usuário. */
-			//
-			// if(player_X < 0.0) player_X = 0.0;
-			// if(player_X >= GameLib.WIDTH) player_X = GameLib.WIDTH - 1;
-			// if(player_Y < 25.0) player_Y = 25.0;
-			// if(player_Y >= GameLib.HEIGHT) player_Y = GameLib.HEIGHT - 1;
+			/********************************************/
+			/* Verificando entrada do usuário (teclado) */
+			/********************************************/
+			player.updatePosition();
+			 
+			
 
 			/*******************/
 			/* Desenho da cena */
@@ -382,6 +345,7 @@ public class MainGame {
 			//
 			busyWait(currentTime + 5);
 		}
+		
 	}
 
 	public List<Enemy1> getEnemies1() {
@@ -414,11 +378,9 @@ public class MainGame {
 			Thread.yield();
 	}
 
-	public void setRunning(boolean b) {
-		running = b;		
-	}
-
-	
+	public void pauseResume(){
+		running = !running;
+	}	
 
 }
 

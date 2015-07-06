@@ -111,7 +111,7 @@ public class Player extends Shooter {
 			}
 
 		}
-		if(GameLib.iskeyPressed(GameLib.KEY_ESCAPE)) mainGame.setRunning(false);
+		if(GameLib.iskeyPressed(GameLib.KEY_ESCAPE)) mainGame.pauseResume();
 		
 	}
 
