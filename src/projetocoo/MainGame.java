@@ -414,6 +414,10 @@ public class MainGame {
 			Thread.yield();
 	}
 
+	public void setRunning(boolean b) {
+		running = b;		
+	}
+
 	
 
 }

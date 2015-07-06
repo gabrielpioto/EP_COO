@@ -44,6 +44,15 @@ public class Player extends Shooter {
 	public void setRadius(double radius) {
 		super.setRadius((radius < MIN_RADIUS) ? MIN_RADIUS : radius);
 	}
+	
+	@Override
+	public void setPosition(double x, double y) {
+		if(x < 0.0) x = 0.0;
+		if(x >= GameLib.WIDTH) x = GameLib.WIDTH - 1;
+		if(y < 25.0) y = 25.0;
+		if(y >= GameLib.HEIGHT) y = GameLib.HEIGHT - 1;
+		super.setPosition(x, y);
+	}
 
 	@Override
 	public void draw() {
@@ -102,6 +111,8 @@ public class Player extends Shooter {
 			}
 
 		}
+		if(GameLib.iskeyPressed(GameLib.KEY_ESCAPE)) mainGame.setRunning(false);
+		
 	}
 
 }
