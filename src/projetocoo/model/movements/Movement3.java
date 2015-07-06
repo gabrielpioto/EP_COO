@@ -16,7 +16,9 @@ public class Movement3 implements MovementType{
 		y = e.getY() + e.getVy() * Math.sin(e.getAngle()) * mainGame.getDelta()
 				* (-1.0);
 		System.out.println(e.getAngle());
-		e.setAngle(Math.atan((e.getY() - p.getY()) / (p.getX() - e.getX())));
+		double angle = Math.atan((e.getY() - p.getY()) / (p.getX() - e.getX())); 
+		if(p.getX() < e.getX()) angle -= Math.PI;
+		e.setAngle(angle);
 
 		e.setPosition(x, y);
 		

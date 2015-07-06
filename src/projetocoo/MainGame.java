@@ -203,6 +203,10 @@ public class MainGame {
 				player.collide(enemy.getProjectiles());
 				enemy.collide(player.getProjectiles());
 			}
+			
+			for(Enemy enemy : enemies3){
+				enemy.collide(Collections.singletonList(player));
+			}
 
 			player.collide(enemies1);
 			player.collide(enemies2);

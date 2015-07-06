@@ -25,8 +25,9 @@ public class Enemy3 extends Enemy {
 		this.setPosition(x, y);
 		this.setVelocity(0.1, 0.1);
 		Player p = mainGame.getPlayer();
-		
-		this.setAngle(Math.atan((getY() - p.getY()) / (p.getX() - getX())));
+		double angle = Math.atan((getY() - p.getY()) / (p.getX() - getX())); 
+		if(p.getX() < getX()) angle -= Math.PI;
+		this.setAngle(angle);
 		this.setRv(0.0);
 		// this.activateProjectiles();
 		this.setNextShot(mainGame.getCurrentTime() + 300);
