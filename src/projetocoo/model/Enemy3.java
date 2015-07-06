@@ -11,7 +11,7 @@ import projetocoo.model.shooter.ActiveShooter;
 public class Enemy3 extends Enemy {
 
 	public Enemy3() {
-		super(30.0);
+		super(15.0);
 		setMovementType(new Movement3());
 	}
 

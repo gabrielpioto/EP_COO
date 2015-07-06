@@ -9,7 +9,8 @@ import projetocoo.model.Player;
 import projetocoo.model.shooter.InactiveShooter;
 
 public abstract class PowerUp extends Element {
-	boolean active = false;
+	private boolean active = false;
+	private Color color;
 
 	public PowerUp() {
 		super();
@@ -31,9 +32,13 @@ public abstract class PowerUp extends Element {
 	@Override
 	public void draw() {
 		if (active) {
-			GameLib.setColor(Color.WHITE);
+			GameLib.setColor(color);
 			GameLib.drawDiamond(getX(), getY(), getRadius());
 		}
+	}
+	
+	protected void setColor(Color color){
+		this.color = color;
 	}
 
 	public abstract void boost(Player p);

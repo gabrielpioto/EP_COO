@@ -1,19 +1,24 @@
 package projetocoo.model;
 
+import java.awt.Color;
+
 import projetocoo.GameLib;
 import projetocoo.MainGame;
 import projetocoo.model.base.PowerUp;
 
 public class PowerUp1 extends PowerUp {
 
+	private static final double DEFAULT_FACTOR = 0.9;
+	
 	public PowerUp1(double radius) {
 		super(radius);
+		setColor(Color.WHITE);
 	}
 
 	@Override
 	public void boost(Player p) {
 
-		p.setRadius(p.getRadius() / 2);
+		p.setRadius(p.getRadius() * DEFAULT_FACTOR);
 
 	}
 

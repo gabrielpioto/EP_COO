@@ -12,6 +12,7 @@ import projetocoo.model.Enemy2;
 import projetocoo.model.Enemy3;
 import projetocoo.model.Player;
 import projetocoo.model.PowerUp1;
+import projetocoo.model.PowerUp2;
 import projetocoo.model.base.Element;
 import projetocoo.model.base.Enemy;
 import projetocoo.model.base.PowerUp;
@@ -26,6 +27,7 @@ public class MainGame {
 	private static final int NUMBER_BACKS_1 = 20;
 	private static final int NUMBER_BACKS_2 = 50;
 	private static final int NUMBER_POWERUPS_1 = 1;
+	private static final int NUMBER_POWERUPS_2 = 1;
 
 	/* Indica que o jogo está em execução */
 	boolean running = true;
@@ -34,17 +36,20 @@ public class MainGame {
 
 	private long delta;
 	private long currentTime = System.currentTimeMillis();
+	
 	private long nextEnemy1Delay = (currentTime + 2000);
 	private long nextEnemy2Delay = (currentTime + 7000);
 	private long nextEnemy3Delay = (currentTime + 5000);
+	
 	private long nextPowerUp1Delay = (currentTime + 1000);
+	private long nextPowerUp2Delay = (currentTime + 1000);
 
 	public void setNextPowerUp1Delay(long nextPowerUp1Delay) {
 		this.nextPowerUp1Delay = nextPowerUp1Delay;
 	}
-
-	public long getNextPowerUp1Delay() {
-		return nextPowerUp1Delay;
+	
+	public void setNextPowerUp2Delay(long nextPowerUp2Delay) {
+		this.nextPowerUp2Delay = nextPowerUp2Delay;	
 	}
 
 	public long getNextEnemy1Delay() {
@@ -86,8 +91,9 @@ public class MainGame {
 
 	private List<Background> backs2 = new ArrayList<Background>(NUMBER_BACKS_2);
 
-	private List<PowerUp1> powerUps1 = new ArrayList<PowerUp1>(
-			NUMBER_POWERUPS_1);
+	private List<PowerUp1> powerUps1 = new ArrayList<PowerUp1>(NUMBER_POWERUPS_1);
+	
+	private List<PowerUp2> powerUps2 = new ArrayList<PowerUp2>(NUMBER_POWERUPS_2);
 
 	// private List<Projectile> playerProjectiles= new
 	// ArrayList<Projectile>(NUMBER_PROJECTILES);
@@ -110,7 +116,11 @@ public class MainGame {
 		}
 
 		for (int i = 0; i < NUMBER_POWERUPS_1; i++) {
-			powerUps1.add(new PowerUp1(5.0));
+			powerUps1.add(new PowerUp1(8.0));
+		}
+		
+		for (int i = 0; i < NUMBER_POWERUPS_2; i++) {
+			powerUps2.add(new PowerUp2(6.0));
 		}
 
 		for (int i = 0; i < NUMBER_BACKS_1; i++) {
@@ -251,11 +261,16 @@ public class MainGame {
 			for (PowerUp1 p : powerUps1) {
 				p.update();
 			}
+			
+			for (PowerUp2 p : powerUps2) {
+				p.update();
+			}
 
 			Enemy.Spawn(enemies1, nextEnemy1Delay);
 			Enemy.Spawn(enemies2, nextEnemy2Delay);
 			Enemy.Spawn(enemies3, nextEnemy3Delay);
 			PowerUp.Spawn(powerUps1, nextPowerUp1Delay);
+			PowerUp.Spawn(powerUps2, nextPowerUp2Delay);
 
 			//
 			// /********************************************/
@@ -326,34 +341,19 @@ public class MainGame {
 			 * playerProjectiles.get(i).draw(); }
 			 */
 
-			/* desenhando projeteis (inimigos) */
+			/* desenhando projeteis e inimigos */
 			for (Enemy e : enemies1) {
 				for (Projectile p : e.getProjectiles()) {
 					p.draw();
 				}
+				e.draw();
 			}
 
 			for (Enemy e : enemies2) {
 				for (Projectile p : e.getProjectiles()) {
 					p.draw();
 				}
-			}
-
-			/*
-			 * for (int i = 0; i < enemyProjectiles.size(); i++){
-			 * enemyProjectiles.get(i).draw(); }
-			 */
-
-			/* desenhando inimigos (tipo 1) */
-
-			for (int i = 0; i < enemies1.size(); i++) {
-				enemies1.get(i).draw();
-			}
-
-			/* desenhando inimigos (tipo 2) */
-
-			for (int i = 0; i < enemies2.size(); i++) {
-				enemies2.get(i).draw();
+				e.draw();
 			}
 
 			/* desenhando inimigos (tipo 3) */
@@ -365,6 +365,10 @@ public class MainGame {
 			/* desenhando powerups (tipo 1) */
 
 			for (PowerUp1 p : powerUps1) {
+				p.draw();
+			}
+			
+			for (PowerUp2 p : powerUps2) {
 				p.draw();
 			}
 
@@ -410,4 +414,7 @@ public class MainGame {
 			Thread.yield();
 	}
 
+	
+
 }
+

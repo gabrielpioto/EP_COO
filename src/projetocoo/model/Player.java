@@ -15,6 +15,9 @@ import projetocoo.model.shooter.ExplodingShooter;
 
 public class Player extends Shooter {
 	private static final int NUMBER_PROJECTILES = 10;
+	private static final int MIN_NEXT_SHOT_DELAY = 60;
+	private static final int MIN_RADIUS = 5;
+	private long nextShotDelay = 300;
 
 	public Player(double x, double y, double vx, double vy, double radius,
 			long nextShot) {
@@ -25,6 +28,21 @@ public class Player extends Shooter {
 			projectiles.add(new PlayerProjectile());
 		}
 		setProjectiles(projectiles);
+	}
+
+	public long getNextShotDelay() {
+		return nextShotDelay;
+	}
+
+	public void setNextShotDelay(long nextShotDelay) {
+
+		this.nextShotDelay = (nextShotDelay < MIN_NEXT_SHOT_DELAY) ? MIN_NEXT_SHOT_DELAY
+				: nextShotDelay;
+	}
+	
+	@Override
+	public void setRadius(double radius) {
+		super.setRadius((radius < MIN_RADIUS) ? MIN_RADIUS : radius);
 	}
 
 	@Override
@@ -77,7 +95,8 @@ public class Player extends Shooter {
 						free.setPosition(x, y);
 						free.setVelocity(0.0, -1.0);
 						free.setState(new ActiveProjectile());
-						this.setNextShot(mainGame.getCurrentTime() + 100);
+						this.setNextShot(mainGame.getCurrentTime()
+								+ nextShotDelay);
 					}
 				}
 			}
